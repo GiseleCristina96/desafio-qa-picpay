@@ -1,81 +1,57 @@
-# Desafio SRE
+# Desafio Quality Assurance Sênior
+   Este projeto utiliza o framework de automação Cypress e a linguagem JavaScript para realizar testes automatizados na página de login de empréstimos do PicPay (https://meus-emprestimos.picpay.com/). O objetivo é validar alguns cenários como campo obrigatório e mensagens de erro.
 
-Obrigado pelo interesse em fazer parte do nosso time! Preparamos este desafio com carinho para ajudar a entender um pouco mais dos seus conhecimentos na área de DevOps/SRE
+## Configuração do Projeto
+   1. *Clone o repositório*
+      ```
+      git clone https://github.com/seu-usuario/desafio-qa-picpay.git
+      ```
+   2. *Acesse o diretório desafio-qa-picpay*
+      ```
+      cd desafio-qa-picpay
+      ```
+   3. *Instale as dependências*
+      ```
+      npm install
+      ```    
 
-Se não entender algum conceito ou parte do problema, não é motivo para se preocupar! Queremos que faça o desafio até onde souber.
+### No modo interativo (Cypress Test Runner)
 
-No mais, divirta-se :D
+Se você deseja rodar os testes no modo interativo, abra o Cypress Test Runner com:
 
-## Avisos antes de começar
+```bash
+npx cypress open
+```
 
-- Leia com atenção este documento todo e tente seguir ao **máximo** as instruções;
-- Crie um repositório no seu GitHub **sem citar nada relacionado ao PicPay**;
-- Faça seus commits no seu repositório;
-- Envie o link do seu repositório para o email **do recrutador responsável**;
-- Dê uma olhada nos [Links Úteis](#links-úteis);
-- Dê uma olhada em como será a [entrevista](#para-o-dia-da-entrevista-técnica);
-- Fique à vontade para perguntar qualquer dúvida aos recrutadores;
+Depois, basta escolher o arquivo de teste para executar.
+Exemplo, Na UI do cypress:
 
-## Conteúdo do repositório
+```
+- Clicar em E2E Testing
+- Selecionar Chrome e clicar em `Start E2E Testing in Chrome`
+- No menu, selecionar Specs
+- Clicar em login.cy.js
+```
 
-Este projeto é um exemplo bem simples de aplicação web full-stack, utilizando uma arquitetura de microsserviços com um BFF em **Go** para otimizar a comunicação entre o frontend e o backend. O backend em **Java** interage com um banco de dados MySQL para armazenar e recuperar os dados, enquanto o frontend em **React** é responsável pela interface do usuário.
+### Logs e Resultados
 
-Você pode subir o banco de dados MySQL utilizando o arquivo **./docker-compose.yaml** e pode ser inicializado utilizando o **./init.sql**
+No modo interativo, os logs de execução são exibidos diretamente na interface gráfica do Cypress.
 
-Alguns exemplos de requisição estão no arquivo **./requests.http**
-
-### Váriaveis de Ambiente
-
-|Aplicação|Key|Default|Description|Exemplo|
-|-|-|-|-|-|
-|backend|DB_URL|n/a|Define a URL de conexão com o banco de dados.|mysql://user:password@host:port/database|
-|backend|DB_USERNAME|n/a|Especifica o nome de usuário utilizado para autenticar a conexão com o banco de dados.|myuser|
-|backend|DB_PASSWORD|n/a|Contém a senha associada ao nome de usuário para a conexão com o banco de dados.|mypassword123|
-|backend|JWT_SECRET_KEY|n/a|É uma chave secreta utilizada para gerar e verificar tokens JWT (JSON Web Tokens).|averylongandsecuresecretkey|
-|bff|PORT|8085|Porta de exposição do BFF.|n/a|
-|bff|API_URL|http://localhost:8080|URL de exposição do backend.|n/a|
-|bff|CLIENT_ID|n/a|Identifica um cliente em um sistema de autenticação OAuth.|bff|
-|bff|CLIENT_SECRET|n/a|É uma chave secreta associada ao Client ID, utilizada para verificar a identidade do cliente durante o processo de autenticação OAuth.|averylongandsecureclientsecret|
-
-# Avaliação
-
-## O que deve ser feito?
-
-- Ajustes que fazem todas as aplicações subirem e se comunicarem;
-- Colete as métricas expostas pela aplicação backend, seria legal também exibilas em algum dashboard;
-- Colete e armazene os logs das aplicações;
-- Um README contendo os seus pensamentos ao longo do projeto;
-- Um desenho contendo os serviços que explique o funcionamento;
-
-
-Faça commits ao longo do processo, queremos entender o seu modo de pensar! :)
-
-Para a entrevista, separe também anotações contendo melhorias que faria em cada aplicação ou na arquitetura em geral. Não envie estas anotações na pull request.
-
-## O que será avaliado ?
-
-- Compreensão de arquitetura;
-- Monitoramento;
-- Documentação;
-- Conteinerização;
-- Habilidade de resolução de problemas.
-
-
-## O que será um Diferencial
-
-- Automatização
-- Utilização de Helm/Kubernetes
-- Alertas
-- Melhorias na arquitetura.
-
-
-## Links Úteis
-
-- https://docs.spring.io/spring-boot/reference/actuator/metrics.html
-- https://github.com/open-telemetry/opentelemetry-java-instrumentation
-- https://12factor.net/
-- https://docs.docker.com/reference/dockerfile/
-- https://docs.docker.com/compose/
-- https://pt-br.legacy.reactjs.org/docs/getting-started.html
-- https://doubletapp.medium.com/overview-of-monitoring-system-with-prometheus-and-grafana-9ce6501eff88
-- https://www.elastic.co/pt/blog/getting-started-with-the-elastic-stack-and-docker-compose
+## Estrutura do projeto
+   ```
+   |-- cypress/
+   |   |-- e2e/              # Testes de ponta a ponta
+   |   |   |-- login.cy.js   # Arquivo com os testes do login
+   |   |-- pages/
+   |   |   |-- Login.js  # Arquivo com as ações feitas nos testes      
+   |   |-- reports/          # Relatório e screenshots gerados
+   |   |   |-- screenshots/  # Captura de tela dos testes, evidências dos passos solicitados.
+   |   |-- support/          # Arquivos de suporte e comandos personalizados
+   |   |   |-- commands.js   # Arquivo com comandos personalizados
+   |   |   |-- e2e.js        # Arquivo com configurações dos testes e2e
+   |   |   |-- helpers/      # Nova pasta para funções auxiliares
+   |   |   |   |-- generateRandomNumber.js  # Arquivo com funções de apoio, como manipulação de dados, formatação, etc.
+   |-- cypress.config.js     # Configurações do Cypress
+   |-- package.json          # Dependências e scripts do projeto
+   |-- README.md             # Informações do projeto
+   ```
